@@ -9,6 +9,9 @@ Convert the original image from type 'uint8' (8-bit integer) to 'double' (real n
 %Load the raw image
 raw_image = imread('https://d396qusza40orc.cloudfront.net/digital%2Fimages%2Fweek3_quizzes%2Foriginal_quiz.jpg');
 imshow(raw_image);
+
+%convert image type
+image = double(raw_image);
 ~~~
 
 ###(2) 
@@ -18,6 +21,15 @@ you will need to first perform low-pass filtering of the original image.
 For this step, create a 3×3 low-pass filter with all coefficients equal to 1/9. 
 Perform low-pass filtering with this filter using the MATLAB function "imfilter" with 'replicate' as the third argument. 
 For more information about low-pass filtering using MATLAB, refer to the programming problem in the homework of module 2.
+
+~~~
+%create filter
+lpfilter = ones(3,3)*1/9;
+
+%do filtering
+filtered_image = imfilter(image, lpfilter, 'replicate');
+imshow(uint8(filtered_image));
+~~~
 
 ###(3) 
 Obtain the down-sampled image by removing every other row and column from the filtered image, that is, 
