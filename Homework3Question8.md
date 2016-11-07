@@ -34,8 +34,25 @@ imshow(uint8(filtered_image));
 ###(3) 
 Obtain the down-sampled image by removing every other row and column from the filtered image, that is, 
 removing the 2nd, 4th, all the way to the 358th row, and then removing the 2nd, 4th, all the way to the 478th column. 
-The resulting image should be of width 240 and height 180 pixles. This completes the procedure for image down-sampling. 
+The resulting image should be of width 240 and height 180 pixels. This completes the procedure for image down-sampling. 
 In the next steps, you will up-sample this low-resolution image to the original resolution via spatial domain processing.
+
+~~~
+%extract width&height of image
+[x,y] = size(filtered_image);
+
+%create logical arrays of pixels to keep
+reducing_factor = 2;
+logical_x = (mod(linspace(0,x-1,x), reducing_factor)==0);
+logical_y = (mod(linspace(0,y-1,y), reducing_factor)==0); 
+logical = logical_y.*logical_x';
+
+%reduce image
+buffer = logical .* filtered_image;
+buffer = buffer(buffer~=0);
+reduced_image = reshape(buffer, round(x/reducing_factor), []);
+imshow(uint8(reduced_image));
+~~~
 
 ###(4) 
 Create an all-zero MATLAB array of width 479 and height 359. 
