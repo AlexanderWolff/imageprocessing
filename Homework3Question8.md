@@ -5,11 +5,11 @@ Download the original image from here.
 The original image is an 8-bit gray-scale image of width 479 and height 359 pixels. 
 Convert the original image from type 'uint8' (8-bit integer) to 'double' (real number).
 
-'''
+~~~
 %Load the raw image
 raw_image = imread( 'https://d396qusza40orc.cloudfront.net/digital%2Fimages%2Fweek3_quizzes%2Foriginal_quiz.jpg' );
 imshow(raw_image);
-'''
+~~~
 
 ###(2) 
 Recall from the lecture that in order to avoid aliasing (e.g., jagged edges) when down-sampling an image, 
