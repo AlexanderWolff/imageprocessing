@@ -82,6 +82,12 @@ In this step you should only provide "imfilter" with two arguments instead of th
 The two arguments are the result from step (4) and the filter specified in this step. 
 This step essentially performs bilinear interpolation to obtain the up-sampled image.
 
+~~~
+%filtering upscaled image (bilinear interpolation)
+nfilter = [0.25,0.5,0.25;0.5,1,0.5;0.25,0.5,0.25];
+upscaled_image = imfilter(enlarged_image, nfilter);
+~~~
+
 ###(6) 
 Compute the PSNR between the upsampled image obtained from step (5) and the original image. 
 For more information about PSNR, refer to the programming problem in the homework of module 2. 
