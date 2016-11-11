@@ -60,6 +60,21 @@ For every odd-valued i∈[1,359] and odd-valued j∈[1,479], set the value of th
 equal to the value of the low-resolution image at (i+12,j+12). 
 After this step you have inserted zeros into the low-resolution image.
 
+~~~
+%scale image by enlarging pixels
+increasing_factor = 2;
+enlarged_image = kron(reduced_image, ones(increasing_factor));
+[dx, dy] = size(enlarged_image);
+dy = dy-1; dx = dx -1;
+enlarged_image = enlarged_image(1:dx, 1:dy);
+
+%introduce zeros
+logical_dx = (mod(linspace(0,dx-1,dx), reducing_factor)==0);
+logical_dy = (mod(linspace(0,dy-1,dy), reducing_factor)==0);
+logical_d = logical_dy.*logical_dx';
+enlarged_image = enlarged_image.*logical_d;
+~~~
+
 ###(5) 
 Convolve the result obtained from step (4) with a filter with coefficients [0.25,0.5,0.25;0.5,1,0.5;0.25,0.5,0.25] 
 using the MATLAB function "imfilter". 
